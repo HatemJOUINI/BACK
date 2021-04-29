@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MENU_ITEMS } from './pages-menu';
+import { MENU_ITEMS2 } from './pages-menu2';
+import { MENU_ITEMS3 } from './pages-menu3';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,6 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+
+
+  menu = MENU_ITEMS;
+  menu2 = MENU_ITEMS2;
+  menu3 = MENU_ITEMS3;
 
   constructor() { }
 

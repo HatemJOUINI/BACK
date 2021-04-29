@@ -10,7 +10,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Monthly TS BY Contract',
         icon: 'nb-bar-chart',
-        link: '/pages/statreports',
+        //link: '/pages/statreports',
       },
 
     ],
@@ -19,7 +19,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Parameters',
     icon: 'nb-compose',
-    link: '/pages/parameters',
+  //  link: '/pages/parameters',
   },
 
   // {
