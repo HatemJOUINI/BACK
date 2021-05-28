@@ -1,0 +1,111 @@
+<nb-card [style.width.px]="1000" [style.height.px]="600">
+  <nb-card-header>
+    Add Task
+    <button nbButton hero status="danger" (click)="dismiss()">Close</button>
+  </nb-card-header>
+
+  <nb-card-body>
+   
+    <form [formGroup]="taskForm">
+
+      <div class="row">
+        <div class="col-sm-4">
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea formControlName="description" nbInput class="form-control" rows="4" placeholder="Description"
+              name="description" [(ngModel)]="task.Description"
+              [ngClass]="{ 'is-invalid': submitted && f.description.invalid }"></textarea>
+            <div *ngIf="submitted && f.description.invalid" class="invalid-feedback">
+              <div *ngIf="f.description.errors.required">Description is required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="contract">Requirement</label>
+            <input formControlName="Requirement"  disabled class="form-control" size="small" outline
+              status="success" [(ngModel)]="idR" name="idR" (click)="$event.preventDefault()"
+              [ngClass]="{ 'is-invalid': submitted && f.Requirement.invalid }">
+              <div *ngIf="submitted && f.Requirement.invalid" class="invalid-feedback">
+                  <div *ngIf="f.Requirement.errors.required">Requirement is required</div>
+                </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>Estimate WorkLoad</label>
+            <input formControlName="estimateWorkLoad" nbInput type="number"  min="0" placeholder="Estimate WorkLoad"
+              class="form-control" name="estimateWorkLoad" [(ngModel)]="task.EstimateWorkLoad">
+          </div>
+
+          <div class="form-group">
+            <label>To finalise</label>
+            <input formControlName="toFinalise" nbInput type="number" min="0" 
+              placeholder="To finalise" class="form-control"
+              name="toFinalise" [(ngModel)]="task.tofinalise">
+          </div>
+
+            <div class="form-group">
+              <label>Type</label>
+              <select formControlName="Type" 
+              (blur)="TypeValidateSelect($event.target.value)"
+                (change)="TypeValidateSelect($event.target.value)" class="form-control" [ngClass]="{ 'is-invalid': submitted && TypeSelectHasError}" placeholder="Select Type"
+                size="small" outline status="success" [(ngModel)]="type" name="type" (click)="$event.preventDefault()">
+                <option value="" selected> </option>
+                <option> Functional  </option>
+                <option> Non-functional </option>
+              </select>
+              <div *ngIf="TypeSelectHasError" class="invalid-feedback">Type is required</div>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label>Closing date</label>
+            <input formControlName="closingDate" [nbDatepicker]="datepicker" placeholder="Closing date"
+              class="form-control" [(ngModel)]="closingDateT"
+              [ngClass]="{ 'is-invalid': submitted && f.closingDate.errors }">
+            <nb-datepicker #datepicker format="MM/dd/yyyy"></nb-datepicker>
+            <div *ngIf="submitted && f.closingDate.errors" class="invalid-feedback">
+              <div>Closing Date is required</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Status</label>
+            <select formControlName="status" 
+            [(ngModel)]="parameter" name="parameter" class="form-control"  
+            placeholder="Select Status" size="small" outline status="success" (click)="$event.preventDefault()">
+              <option value=""  selected> </option>
+              <option > Active </option>
+              <option > Inactive </option>
+
+            </select>
+          </div>
+
+          <div [hidden]="hideUsersCombo" class="form-group">
+            <!-- change that later no ! for user-->
+            <label>Employees</label>
+            <!-- Will be auto complete here -->
+            <select class="form-control" placeholder="Select Employee"
+              size="small" outline status="success" formControlName="employees" [(ngModel)]="idEmp" name="idEmp"
+              (click)="employeeChange()" >
+              <!-- <option value="" disabled selected> </option> -->
+              <option *ngFor="let employee of sourceEmp" value="{{employee.Id}}">
+                {{employee.FirstName}} {{employee.LastName}}
+              </option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+      <button nbButton class="clearButton" type="reset" outline status="info">Clear</button>
+
+      <button nbButton class="submitButton" hero status="success" (click)="create()">Submit</button>
+
+    </form>
+
+  </nb-card-body>
+</nb-card>

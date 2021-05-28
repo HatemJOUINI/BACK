@@ -1,0 +1,49 @@
+<nb-card>
+    <nb-card-header>
+      Timesheet List
+      <button  nbButton hero status="success"
+        (click)="openAddTasks()">Add Tasks</button>
+      <button  nbButton hero status="success"
+        (click)="addAllTasks()">Add All Tasks</button>
+      <button  nbButton hero status="success"
+        (click)="openAddOtherTasks()">Add RH Tasks</button>
+    </nb-card-header>
+  
+    <nb-card-body>
+  
+      <div class="row" >
+  
+        <div class="column" class="col-sm-3">
+          <div >
+            <label><b>Employee</b></label>
+            <select class="form-control" placeholder="Select User" size="small" outline status="success" [(ngModel)]="idE"
+              name="idE"  (click)="reload()" >
+              <option value="" selected>Select your option</option>
+              <option *ngFor=" let employee of employees " value="{{employee.id}}">
+                {{employee.FirstName}} {{employee.LastName}}
+              </option>
+            </select>
+            <br>
+            <br>
+          </div>
+  
+          <div>
+            <h6>Selected range: {{ range.start | date }} - {{ range.end | date }}</h6>
+            <nb-calendar-range [(range)]="range" (rangeChange)="handleRangeChange($event)"
+              [(boundingMonth)]="boundingMonthValue">
+            </nb-calendar-range>
+          </div>
+        </div>
+  
+        <div class="column" class="col-sm-9">
+          <ng2-smart-table [settings]="settings" [source]="source" (editConfirm)="onEditConfirm($event)">
+          </ng2-smart-table>
+        </div>
+  
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+        </ngx-loading>
+  
+      </div>
+  
+    </nb-card-body>
+  </nb-card>

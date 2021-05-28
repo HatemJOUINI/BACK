@@ -1,0 +1,22 @@
+<nb-card>
+  <nb-card-header>
+    Employees List
+    <button 
+   
+    nbButton hero status="success" (click)="open()">New User</button>
+    <!-- <button nbButton outline status="info" (click)="open2()">Request a holiday</button> -->
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table 
+   
+    [settings]="settings" [source]="source" 
+    (editConfirm)="onEditConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+
+    <ngx-loading [show]="loading" 
+      [config]="{ backdropBorderRadius: '3px' }">
+    </ngx-loading>
+    
+  </nb-card-body>
+</nb-card>

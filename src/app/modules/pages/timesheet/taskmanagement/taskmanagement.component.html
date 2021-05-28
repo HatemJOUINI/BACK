@@ -1,0 +1,40 @@
+<nb-card>
+  <nb-card-header>
+    Tasks List
+    <button  nbButton hero status="success"
+      (click)="openValidateTasks()">Validate Tasks</button>
+
+    <button  nbButton hero status="success"
+      (click)="open()">New Task</button>
+  </nb-card-header>
+
+  <nb-card-body>
+
+    <div class="column" class="col-sm-3">
+      <div >
+        <label><b>Employee</b></label>
+        <select class="form-control" placeholder="Select User" size="small" hero status="success" [(ngModel)]="idE"
+          name="idE" >
+          <!--(click)="$event.preventDefault()-->
+          <option value="user.id" selected disabled> </option>
+          <option *ngFor=" let employee of employees " value="{{employee.Id}}">
+            {{employee.FirstName}} {{employee.LastName}}
+          </option>
+        </select> 
+        <br>
+        <br>
+      </div>
+    </div>
+
+    <ng2-smart-table 
+      [settings]="settings" [source]="source"
+      (editConfirm)="onEditConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+    
+    <ngx-loading [show]="loading" 
+      [config]="{ backdropBorderRadius: '3px' }" 
+      >
+    </ngx-loading>
+
+  </nb-card-body>
+</nb-card>

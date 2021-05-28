@@ -1,0 +1,21 @@
+<nb-card>
+  <nb-card-header>
+    Requirement List
+    <button  nbButton hero status="success"
+      (click)="open()">New Requirement</button>
+    <button  nbButton hero status="info">Import
+      Requirements From File</button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table 
+      [settings]="settings" [source]="source" 
+      (editConfirm)="onEditConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+
+    <ngx-loading [show]="loading" 
+      [config]="{ backdropBorderRadius: '3px' }">
+    </ngx-loading>
+    
+  </nb-card-body>
+</nb-card>
