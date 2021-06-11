@@ -73,12 +73,13 @@ export class CreateOtherTaskComponent implements OnInit {
         type: 'string',
         filter: true
       },
+      
       Status: {
         title: 'Status',
         type: 'string',
         filter: true
       },
-      Name: {
+   /*   Name: {
         title: 'Contract',
         type: 'string',
         filter: true
@@ -92,7 +93,7 @@ export class CreateOtherTaskComponent implements OnInit {
         title: 'Parent Requirement',
         type: 'string',
         filter: true
-      },
+      }, */
     },
   };
 
@@ -105,17 +106,17 @@ export class CreateOtherTaskComponent implements OnInit {
     private parameterService: ParameterService,
     private formBuilder: FormBuilder) {
 
-    this.hideUsersCombo = true; // div containing list of users hidden by default
+   // this.hideUsersCombo = true; // div containing list of users hidden by default
 
-    this.authService.onTokenChange()
-      .subscribe((token: NbAuthJWTToken) => {
+   // this.authService.onTokenChange()
+    //  .subscribe((token: NbAuthJWTToken) => {
 
-        if (token.isValid()) {
-          this.user = token.getPayload(); // here we receive a payload
+    //    if (token.isValid()) {
+     //     this.user = token.getPayload(); // here we receive a payload
           // from the token and assigne it to our `user` variable
-        }
+    //    }
 
-      });
+  //    });
       
 
   }
@@ -133,9 +134,9 @@ export class CreateOtherTaskComponent implements OnInit {
       .subscribe(data => this.parameters = data);
 
 
-    this.requirementService.GetOther(this.user.id.toString()).subscribe((data) => {
+   /* this.requirementService.GetOther(this.user.id.toString()).subscribe((data) => {
       this.sourceReq = new LocalDataSource(data);
-    });
+    }); */
 
 
     this.parameterService.getByGroup("HRTasksType")

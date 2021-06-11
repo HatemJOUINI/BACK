@@ -85,7 +85,8 @@ export class CreateTaskInListTaskComponent implements OnInit {
       Type: [],
     })
 
-    if (this.user.rol != 'User') {
+   // if (this.user.rol != 'User')
+     {
       this.employeeService.getAll().subscribe(data => this.sourceEmp = data);
       }
 

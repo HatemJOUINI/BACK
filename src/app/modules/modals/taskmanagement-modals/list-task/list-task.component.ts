@@ -136,14 +136,14 @@ export class ListTaskComponent implements OnInit {
     private authService: NbAuthService,
     private datePipe: DatePipe, //For Date format
   ) {
-    this.authService.onTokenChange()
+   /* this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
         if (token.isValid()) {
           this.user = token.getPayload(); // here we receive a payload
           // from the token and assigne it to our `user` variable
           // this.token = token;
         }
-      });
+      }); */
   }
 
   ngOnInit() {

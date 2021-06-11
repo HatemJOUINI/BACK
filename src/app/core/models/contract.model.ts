@@ -16,9 +16,10 @@ export class Contract {
     CoeffSaturday?: string;
     Description?: string;
     ContractId?:Guid;
+    CustomerId_FK?:number;
 
 
-    customerId?: Guid;
+   // customerId?: Guid;
     customerName?: string;
 }
 

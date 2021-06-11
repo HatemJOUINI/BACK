@@ -10,21 +10,7 @@
 
   <nb-card-body>
 
-    <div class="column" class="col-sm-3">
-      <div >
-        <label><b>Employee</b></label>
-        <select class="form-control" placeholder="Select User" size="small" hero status="success" [(ngModel)]="idE"
-          name="idE" >
-          <!--(click)="$event.preventDefault()-->
-          <option value="user.id" selected disabled> </option>
-          <option *ngFor=" let employee of employees " value="{{employee.Id}}">
-            {{employee.FirstName}} {{employee.LastName}}
-          </option>
-        </select> 
-        <br>
-        <br>
-      </div>
-    </div>
+   
 
     <ng2-smart-table 
       [settings]="settings" [source]="source"

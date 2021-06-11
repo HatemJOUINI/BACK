@@ -7,23 +7,25 @@ export class Requirement {
     updateDate?: string;
     updateBy?: string;
     Description?: string;
-    Type?: string;
-    Status?: number;
     Nom?: string;
     RequirementId?:number;
     StartDate?: string;
     ClosingDate?: string;
-    ParentRequirementId?: Guid;
+    type?: string;
+    status?: string;
+
+  /*  ParentRequirementId?: Guid;
     ContractId?: Guid;
-    ReleaseId?: Guid;
+    ReleaseId?: Guid; */
 
 
 
 
-    parentRequirementName?: Guid;
+
+  /*  parentRequirementName?: Guid;
     contractName?: string;
     releaseDescription?: string;
-
+*/
     
 
 }

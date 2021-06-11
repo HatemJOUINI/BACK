@@ -97,7 +97,7 @@ export class AssignedUsersToTeamComponent implements OnInit {
     this.ref.close();
   }
 
-   onDeleteConfirm(event): void {
+ /*  onDeleteConfirm(event): void {
       console.log(event.data.id);
       console.log(this.team.id.toString());
     if (window.confirm('Are you sure you want to delete?')) {
@@ -107,7 +107,7 @@ export class AssignedUsersToTeamComponent implements OnInit {
     } else {
        event.confirm.reject();
      }
-   }
+   } */
 
   showToast(status, message) {
     this.toastrService.success(status, message, { status, });

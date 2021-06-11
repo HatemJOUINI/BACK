@@ -20,6 +20,7 @@ import { RoleProvider } from './core/services/role.provider';
 import { JsonpModule } from '@angular/http';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ExcelService } from './core/services/ExcelService';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ExcelService } from './core/services/ExcelService';
     NbThemeModule.forRoot({ name: 'default' }),
     // this will enable the default theme, you can change this to `cosmic` to enable the dark theme
     SharedModule,
+    ChartsModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,

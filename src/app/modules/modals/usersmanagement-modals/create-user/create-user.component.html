@@ -94,12 +94,12 @@
               <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
             </div>
   
-            <label>User name</label>
+       <!--     <label>User name</label>
             <input formControlName="userName" nbInput class="form-control" id="userName" name="userName"
               placeholder="User Name" [(ngModel)]="employee.userName"
               [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
             <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-            <!--  <div *ngIf="f.userName.errors.required">user name is required</div> -->
+             <div *ngIf="f.userName.errors.required">user name is required</div> 
             </div>
   
             <label for="password">Password</label>
@@ -110,7 +110,7 @@
               <div *ngIf="f.password.errors.required">password is required</div>
               <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
             </div>
-  
+          -->
           </div>
   
           <div class="col-sm-4">
@@ -175,8 +175,8 @@
         <div class="row">
           <div class="col-sm-4">
             <label>Contract</label>
-            <select formControlName="contract" (blur)="contractValidateSelect($event.target.value)"
-            (change)="contractValidateSelect($event.target.value)" class="form-control" placeholder="Select Contract" size="small" outline
+            <select formControlName="contract" 
+             class="form-control" placeholder="Select Contract" size="small" outline
               status="success" [(ngModel)]="idcontract" name="contract" (click)="$event.preventDefault()"
               [ngClass]="{ 'is-invalid': affected && contractSelectHasError }">
               <option disabled value="default"> </option>

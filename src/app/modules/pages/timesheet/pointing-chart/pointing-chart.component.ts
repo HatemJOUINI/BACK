@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Employee } from 'src/app/core/models/employee.model';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { Pointing } from 'src/app/core/models/pointing.model';
 import { LocalDataSource } from 'ng2-smart-table';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { RequestHolidayComponent } from 'src/app/modules/modals/usersmanagement-modals/request-holiday/request-holiday.component';
+import { DeleteErrorComponent } from 'src/app/modules/modals/delete-error/delete-error.component';
+import { ListContractRateComponent } from 'src/app/modules/modals/contractsmanagement-modals/list-contract-rate/list-contract-rate.component';
+import { ResetPasswordComponent } from 'src/app/modules/modals/usersmanagement-modals/reset-password/reset-password.component';
+import { AddTasksComponent } from 'src/app/modules/modals/timesheetmanagement-modals/add-tasks/add-tasks.component';
+import { AddOtherTaskComponent } from 'src/app/modules/modals/timesheetmanagement-modals/add-other-task/add-other-task.component';
 
 @Component({
   selector: 'app-pointing-chart',
@@ -10,17 +18,37 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./pointing-chart.component.css']
 })
 export class PointingChartComponent implements OnInit {
-employee:Employee;
-employees;
-pointing:Pointing;
-pointings:Pointing[];
-month;
-year;
-source;
-weekday =["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 
-  constructor(private employeeService:EmployeeService) { }
-  settings={
+  public source: LocalDataSource;
+
+  constructor(
+    private dialogService: NbDialogService,
+    private toastrService: NbToastrService) { }
+
+  data = [
+    {
+      column1: 'Holiday-1',
+      column2: '10-10-2021',
+      column3: 'Hatem Jouini',
+      column4: '',
+      column5: '',
+      column6: '15-10-2010',
+      column7: '7 Jour ',
+      column8: 'User-1'
+    },
+    {
+      column1: 'Holiday-2',
+      column2: '10-10-2021',
+      column3: 'Hatem Jouini',
+      column4: '',
+      column5: '',
+      column6: '15-10-2021',
+      column7: '15 Jour ',
+      column8: 'User-2'
+    }
+  ];
+
+  settings = {
     hideSubHeader: false,
     actions: {
       add: true,
@@ -43,45 +71,87 @@ weekday =["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"
       confirmDelete: true,
     },
     columns: {
-      day: {
-        title: 'Day',
+      column1: {
+        title: 'Id',
         type: 'string',
       },
+      column2: {
+        title: 'Creation Date',
+        type: 'string',
+      },
+      column3: {
+        title: 'Created By',
+        type: 'string',
+      },
+      column4: {
+        title: 'Update Date',
+        type: 'string',
+      },
+      column5: {
+        title: 'updated By',
+        type: 'string',
+      },
+      column6: {
+        title: 'Date',
+        type: 'string',
+      },
+      column7: {
+        title: 'Duration',
+        type: 'string',
+      },
+      column8: {
+        title: 'User Id',
+        type: 'string',
+      },
+      /*
+      button: {
+        title: 'Details',
+        type: 'custom',
+        renderComponent: ButtonListContractsRenderComponent,
+        onComponentInitFunction(instance) {
+          instance.save.subscribe(row => {
+            alert(`${row.name} saved!`);
+          });
+        }
+      },
+      */
     },
   };
 
   ngOnInit() {
-    this.employeeService.getAll().subscribe((data) => { //get list of all users for combo box
-      this.employees = data;
-      this.employees.sort((a,b)=>{
-        var textA = a.firstName.toUpperCase();
-        var textB = b.firstName.toUpperCase();
-        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    });
-    }); 
-    
   }
-  
-  generate(){
-    //console.log(this.getDaysInMonth(this.year,this.month));
-    //console.log(this.getDay(this.year,this.month,1))
-    let daysNumber=this.getDaysInMonth(this.year,this.month);
-    //let date1=new Date(this.year,this.month-1,2);
-    
-    for(let i=1;i<daysNumber+1;i++)
-    {
-      //console.log(this.weekday[this.getDayIndex(this.year,this.month-1,i)]);
-      //console.log(this.getDayIndex(this.year,this.month-1,i));
-      this.pointings[i-1].day=this.weekday[this.getDayIndex(this.year,this.month-1,i)];
-    }
-    // console.log(this.pointings)
-    // this.source = new LocalDataSource(this.pointings);
 
+  showToast(status, message) {
+    this.toastrService.success(status, message, { status, });
   }
-  getDayIndex(y,m,d){
-    return new Date(y, m, d).getDay();
+
+  onDeleteConfirm(event): void {
+    if (window.confirm('Are you sure you want to delete?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
   }
-  getDaysInMonth(y,m){
-    return new Date(y, m, 0).getDate();
+
+  onEditConfirm(event): void {
+    if (window.confirm('Are you sure you want to update?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
   }
+
+
+  
+  open() {
+    this.dialogService.open(AddOtherTaskComponent)
+      .onClose.subscribe((data) => {
+        if (data) { this.source.prepend(data); }
+      }
+      );
+  }
+
+ 
 }
+
+

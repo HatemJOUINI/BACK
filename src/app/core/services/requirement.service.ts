@@ -16,9 +16,12 @@ export class RequirementService {
     return this.apiService.get('api/Requirement');
   }
 
-  create(requirement: CreateRequirement): Observable<Requirement> {
+  create(requirement: any): Observable<Requirement> {
+    console.log (requirement) ;
     return this.apiService.post('api/Requirement/', requirement);
   }
+
+
 
   destroy(requirementId: string): Observable<number> {
     return this.apiService.delete('api/Requirement/' + requirementId);
@@ -28,12 +31,5 @@ export class RequirementService {
     return this.apiService.put('api/Requirement/', requirement);
   }
 
-  GetAllByEmployeeId(employeeId: string): Observable<Requirement[]> {
-    return this.apiService.get('api/Requirement/byEmployees/' + employeeId);
-  }
-
-  GetOther(employeeId: string): Observable<Requirement[]> {
-    return this.apiService.get('api/Requirement/other/'+ employeeId);
-  }
 
 }

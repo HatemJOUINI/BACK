@@ -8,7 +8,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     expanded: true,
     children: [
       {
-        title: 'Monthly TS BY Contract',
+        title: 'Statistics',
         icon: 'nb-bar-chart',
         link: '/pages/statreports',
       },
@@ -22,8 +22,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/parameters',
   },
 
-   {
-   title: 'Pointing chart',
+  {
+   title: ' Holiday ',
    icon: 'nb-compose',
     link: '/pages/pointing',
   }, 

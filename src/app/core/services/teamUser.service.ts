@@ -35,13 +35,5 @@ export class TeamUserService {
     return this.apiService.get('api/TeamUser/byTeam/' + teamUserId);
   }
 
-  GetAllNotAssignedByTeamId(idTeam: string): Observable<Employee[]> {
-    return this.apiService.get('api/TeamUser/byTeamNA/' + idTeam);
-  }
-
-  RemoveEmployeeFromTeam(employeeId: string, teamId: string): Observable<boolean> {
-     return this.apiService.delete('api/TeamUser/' + employeeId + '/' + teamId);
-  }
-
 
 }

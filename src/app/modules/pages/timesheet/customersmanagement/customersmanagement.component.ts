@@ -104,30 +104,6 @@ export class CustomersmanagementComponent implements OnInit {
   };
 
  
-
-/*  ngOnInit() {
-    this.loading = true;
-    this.customerService.getAll().subscribe((data) => {
-      this.source = new LocalDataSource(data);
-      this.loading = false;
-    }, error => {
-      this.loading = false;
-    });
-  }
-
-  open() {
-    this.dialogService.open(CreateCustomerComponent)
-      .onClose.subscribe((data) => {
-        if (data) { this.source.prepend(data); }
-      }
-      );
-  }
-
-  showToast(status, message) {
-    this.toastrService.success(status, message, { status, });
-  }
-
-*/
 ngOnInit() {
   this.loading = true;
   this.customerService.getAll().subscribe((data) => {

@@ -143,9 +143,6 @@ export class CreateUserComponent implements OnInit {
 
   create() {
      this.submitted = true;
-    if (this.userForm.invalid) {
-      return;
-  }
   this.employee.Birthday=this.birthdayU.toDateString();
   this.employee.StartDate=this.startDateU.toDateString();
   this.employee.CivilStatus=this.civilStatu;
@@ -188,19 +185,6 @@ export class CreateUserComponent implements OnInit {
     return null;
   };
 }
-validateSelect(value){
-  if(value ==='default'){
-    this.selectHasError=true;
-  }else{
-    this.selectHasError=false;
-  }
-}
-contractValidateSelect(value) {
-  if (value==="default") {
-    this.contractSelectHasError = true;
-  } else {
-    this.contractSelectHasError = false;
-  }
-}
+
 
 }

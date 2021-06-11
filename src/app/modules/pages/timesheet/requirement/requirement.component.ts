@@ -38,16 +38,17 @@ export class RequirementComponent implements OnInit {
     public http: HttpClient,
     private datePipe: DatePipe, //For Date format
   ) {
-    this.authService.onTokenChange()
-      .subscribe((token: NbAuthJWTToken) => {
+   // this.authService.onTokenChange()
+     // .subscribe((token: NbAuthJWTToken) => {
 
-        if (token.isValid()) {
-          this.user = token.getPayload(); // here we receive a payload
+       // if (token.isValid()) {
+        //  this.user = token.getPayload(); // here we receive a payload
           // from the token and assigne it to our `user` variable
           // this.token = token;
-        }
+     //   }
 
-      });
+      //}
+      //);
   }
 
   settings = {
@@ -87,27 +88,27 @@ export class RequirementComponent implements OnInit {
         title: 'Description',
         type: 'string',
       },
-      Type: {
+      type: {
         title: 'Type',
-        type: 'html',
+        type: 'string',
       /*  editor: {
           type: 'custom',
           component: CustomEditorRequirementType,
         }, */
       },
-      Status: {
+      status: {
         title: 'Status',
-        type: 'html',
+        type: 'string',
         /*editor: {
           type: 'custom',
           component: CustomEditorRequirementStatus,
         }, */
       },
-      contractName: {
+    /*  contractName: {
         title: 'Contract Name',
         type: 'string',
         editable: true,
-      },
+      }, */
       releaseDescription: {
         title: 'Release',
         type: 'string',
@@ -144,7 +145,7 @@ export class RequirementComponent implements OnInit {
           component: CustomDateEditor,
         }, */
       },
-      button: {
+      /*button: {
         title: 'Details',
         type: 'custom',
         filter: true,
@@ -155,7 +156,7 @@ export class RequirementComponent implements OnInit {
           });
         },
         editable: true,
-      },
+      }, */
     },
   };
 

@@ -10,7 +10,7 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "app",  
       "schematics": {},
       "architect": {
         "build": {
@@ -27,12 +27,18 @@
             ],
             "styles": [
               "node_modules/@nebular/theme/styles/prebuilt/default.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/nebular-icons/css/nebular-icons.css"
          
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/chart.js/dist/Chart.min.js"
+            ]
           },
           "configurations": {
             "production": {

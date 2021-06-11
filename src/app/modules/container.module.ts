@@ -75,6 +75,8 @@ import { GenericTaskComponent } from './pages/timesheet/generic-task/generic-tas
 import { CreateOtherTaskComponent } from './modals/taskmanagement-modals/create-other-task/create-other-task.component';
 import { DeleteErrorComponent } from './modals/delete-error/delete-error.component';
 import { CustomEditorOtherTaskType } from './renderers/custom-editor-other-task-type-render.component';
+import { ChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   imports: [
@@ -98,6 +100,7 @@ import { CustomEditorOtherTaskType } from './renderers/custom-editor-other-task-
     NbLayoutModule,
     LayoutModule,
     NbListModule,
+    ChartsModule,
     NbCalendarRangeModule,
   ],
   declarations: [

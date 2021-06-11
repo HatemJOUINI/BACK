@@ -46,29 +46,34 @@ export class CreateContractComponent implements OnInit {
       parameter: ['', Validators.required],
       customer: ['', Validators.required]
     })
-    this.parameterService.getByGroup("ContractsStatus")
-      .subscribe(data => this.parameters = data);
+   /* this.parameterService.getByGroup("ContractsStatus")
+      .subscribe(data => this.parameters = data); */
     this.customerService.getAll()
       .subscribe(data => this.customers = data);
   }
   get f() { return this.contractForm.controls; }
 
+
+
+ 
+
   create() {
+  
     if(this.startDateC>this.endDateC){
   window.alert("Start date must be equal or inferior to end date");return;}
     this.submitted = true;
-    if (this.contractForm.invalid) {
-      return;
-    }
     this.contract.StartDate = this.startDateC.toDateString();
     this.contract.EndDate = this.endDateC.toDateString();
-    this.contract.customerId = this.customerId; 
-    this.contract.Status = this.parameter;
-    this.contractService.create(this.contract).
+   // this.contract.customerId = this.customerId; 
+   this.contract.CustomerId_FK = this.customerId;
+   this.contract.Status = this.parameter;
+   this.contractService.create(this.contract).
       subscribe(contract => {
         this.ref.close(contract);
       });
-  }
+  } 
+
+  
 
   dismiss() {
     this.ref.close();
@@ -84,20 +89,5 @@ export class CreateContractComponent implements OnInit {
     };
   }
 
-  StatusvalidateSelect(value) {
-    if (!value) {
-      this.StatusselectHasError = true;
-    } else {
-      this.StatusselectHasError = false;
-    }
-  }
-
-  CustomervalidateSelect(value) {
-    if (!value) {
-      this.CustomerselectHasError = true;
-    } else {
-      this.CustomerselectHasError = false;
-    }
-  }
 
 }

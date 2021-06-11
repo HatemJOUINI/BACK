@@ -1,164 +1,41 @@
 <nb-card>
   <nb-card-header>
-    Generate Monthly TS By Contract
+    <div>
+      <h6> Daily Orders </h6>
+      <div style="display: block">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+        </canvas>
+      </div>
+    </div>
+    
+    <br> <br> <br> <br> 
+    <nb-card-header>
+    <div>
+      <h6> Number of Customer  </h6>
+    <div style="display: block">
+      <canvas baseChart
+                  [data]="doughnutChartData"
+                  [labels]="doughnutChartLabels"
+                  [chartType]="doughnutChartType"></canvas>
+    </div> 
+    </div>
   </nb-card-header>
-
-  <nb-card-body>
-    <h6>Choose Report's parameters !</h6>
-
-    <br>
-
-    <form>
-    <div class="row">
-        <div class="form-group" class="col-md-2">
-          <label>Customer</label>
-          <div class="form-group"> 
-            <select class="form-control" placeholder="Select Customer" size="small" outline status="success"
-              [(ngModel)]="customerId" name="customerId" (click)="$event.preventDefault()" (change)="reloadContracts()"
-              required>
-              <option value="default" disabled selected> </option>
-              <option value={{customer.Id}} *ngFor="let customer of customers">
-                {{customer.Name}}
-              </option>
-            </select>
-          </div>
-        </div> 
-
- 
-      <div class="form-group" class="col-md-2">
-          <label>Contract</label>
-          <div class="form-group"> 
-            <select class="form-control" placeholder="Select Contract" size="small" outline status="success"
-              [(ngModel)]="contractId" name="contractId" (click)="$event.preventDefault()" required>
-              <option value="default" disabled selected> </option>
-              <option value={{contract.Id}} *ngFor="let contract of contracts">
-                {{contract.Name}}
-              </option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group" class="col-md-2">
-          <label>Month</label>
-          <select class="form-control" placeholder="Select Month" size="small" outline status="success"
-            [(ngModel)]="month" name="month" (click)="$event.preventDefault()" required>
-            <option value="default" disabled selected> </option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-          </select>
-        </div>
-
-        <div class="form-group" class="col-md-2">
-          <label>Year</label>
-          <select class="form-control" placeholder="Select Year" size="small" outline status="success"
-            [(ngModel)]="year" name="year" (click)="$event.preventDefault()" required>
-            <option value="default" disabled selected> </option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-            <option value="2025">2025</option>
-            <option value="2026">2026</option>
-            <option value="2027">2027</option>
-          </select>
-        </div>
-
-      </div>
-
-      <button nbButton hero status="success" (click)="generate()" class="submitButton">Generate</button>
-      <button nbButton type="reset" outline status="info" class="clearButton">Clear</button>
-
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <div *ngIf=showTable id="contentToConvert">
-
-        <h2>Generate Monthly TS By Contract </h2>
-        <div class="logos">
-          <input class="img" type="image" src="assets/logoPDF.ico" (click)="generatePDFDoc()" width="85px"
-            height="85px" />
-          &nbsp;&nbsp;&nbsp;
-          <input class="img" type="image" src="assets/logoEXCEL.png" (click)="generateExcelDoc()" width="85px"
-            height="85px" />
-        </div>
-
-        <div style="font-size: x-large;" class="settings">
-
-          <label><b>Date of extraction : </b></label>
-          {{dateSysFormatted}}
-          <br>
-          <label><b>Contract : </b></label>
-          {{contractId}}
-          <br>
-          <label><b>Customer : </b></label>
-          {{customerId}}
-          <br>
-          <label><b>Month / Year : </b></label>
-          {{month}} / {{year}}
-          <br>
-        </div>
-
-        <br>
-        <br>
-        <br>
-        <br>
-
-
-        <table border="2">
-          <tr>
-            <th colspan="3" scope="colgroup">&nbsp;&nbsp;&nbsp;</th>
-            <th colspan="1" scope="colgroup">Business Hour</th>
-            <th colspan="3" scope="colgroup">Out Of business Hour</th>
-            <th colspan="4" scope="colgroup">Miscellaneous</th>
-          </tr>
-          <tr>
-            <th scope="col">Employee</th>
-            <th scope="col">Total Hours</th>
-            <th scope="col">Days (8h) Total</th>
-
-            <th scope="col">Mo to Fr</th>
-
-            <th scope="col">Mo to Fr (100%)</th>
-            <th scope="col">Sa (150%)</th>
-            <th scope="col">Su (200%)</th>
-
-            <th scope="col">Holiday</th>
-            <th scope="col">Illness</th>
-            <th scope="col">Night Fees</th>
-            <th scope="col">Rest</th>
-          </tr>
-          <tr *ngFor="let element of monthlyTsByContratList">
-            <th scope="row">{{element.firstName}} {{element.lastName}}</th>
-            <td>{{element.totalH}}</td>
-            <td>{{element.totalH/8}}</td>
-
-            <td>{{element.totBusinessH/8}}</td>
-
-            <td>{{element.totOutBusinessHWeek/8}}</td>
-            <td>{{element.totOutBusinessHSaturday/8}}</td>
-            <td>{{element.totOutBusinessHSunday/8}}</td>
-
-            <td>{{element.holiday/8}}</td>
-            <td>{{element.illness/8}}</td>
-           <!--<td>{{element.nightFees/8}}</td>  --> 
-            <td>{{element.rest/8}}</td>
-          </tr>
-        </table>
-
-      </div>
-    </form>
-  </nb-card-body>
-</nb-card>
+    
+    <br> <br> <br> <br> 
+    <nb-card-header>
+    <div> 
+      <h6> Number of Team by Type  </h6>
+    
+    <div style="display: block">
+      <canvas baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"></canvas>
+    </div>
+    </div>
+  </nb-card-header>

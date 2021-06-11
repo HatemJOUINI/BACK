@@ -2,12 +2,12 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS2: NbMenuItem[] = [
 
-  {
+/*  {
     title: 'Home',
     icon: 'nb-home',
     link: '/pages/home',
     home: true
-  },
+  }, */
 
   {
     title: 'Requirements',

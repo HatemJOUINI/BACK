@@ -78,10 +78,10 @@ export class ContractsmanagementComponent implements OnInit {
         title: 'Description',
         type: 'string',
       },
-      customerName: {
+      CustomerId_FK: {
         title: 'Customer Name',
         type: 'string',
-        editable: false,
+        editable: true,
       },
       StartDate: {
         title: 'Start Date',
@@ -91,10 +91,10 @@ export class ContractsmanagementComponent implements OnInit {
           var formatted = this.datePipe.transform(raw, 'dd-MM-yyyy');
           return formatted;
         },
-        editor: {
+      /*  editor: {
           type: 'custom',
           component: CustomDateEditor,
-        },
+        }, */
       },
       EndDate: {
         title: 'End Date',
@@ -104,18 +104,18 @@ export class ContractsmanagementComponent implements OnInit {
           var formatted = this.datePipe.transform(raw, 'dd-MM-yyyy');
           return formatted;
         },
-        editor: {
+        /*editor: {
           type: 'custom',
           component: CustomDateEditor,
-        },
+        },*/
       },
       Status: {
         title: 'Status',
-        type: 'html',
-        editor:{
+        type: 'string',
+       /* editor:{
           type: 'custom',
           component: CustomEditorContractStatus,
-        }
+        } */
       },
       CoefBase: {
         title: 'Coeff Base',

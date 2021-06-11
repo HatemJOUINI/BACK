@@ -109,7 +109,7 @@ export class CreateTaskComponent implements OnInit {
 
     this.hideUsersCombo = true; // div containing list of users hidden by default
 
-    this.authService.onTokenChange()
+  /*  this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
 
         if (token.isValid()) {
@@ -121,7 +121,7 @@ export class CreateTaskComponent implements OnInit {
           this.hideUsersCombo = false;
         }
 
-      });
+      }); */
 
 
   }
@@ -139,18 +139,19 @@ export class CreateTaskComponent implements OnInit {
       Type: ['', Validators.required],
     });
 
-    this.parameterService.getByGroup("RequirementsStatus")
+   this.parameterService.getByGroup("RequirementsStatus")
       .subscribe(data => this.parameters = data);
 
     this.parameterService.getByGroup("UserTasksType")
-      .subscribe(data => this.typeList = data);
+      .subscribe(data => this.typeList = data); 
 
-    this.requirementService.GetAllByEmployeeId(this.idEmp.toString()).subscribe((data) => {
-      this.sourceReq = new LocalDataSource(data);
-    })
+  //  this.requirementService.GetAllByEmployeeId(this.idEmp.toString()).subscribe((data) => {
+    //  this.sourceReq = new LocalDataSource(data);
+  //  })
 
 
-    if (this.user.rol != "User") {
+   // if (this.user.rol != "User") 
+   {
       this.employeeService.getAll().subscribe(data => {
         this.sourceEmp = data;
         this.sourceEmp.sort((a, b) => {
@@ -182,7 +183,8 @@ export class CreateTaskComponent implements OnInit {
     this.task.ClosingDate = this.closingDateT.toDateString();
     this.task.userId = this.idEmp;
 
-    if (this.user.rol == 'User') {
+    if (this.user.rol == 'User') 
+    {
       this.task.IsValidated = 'False';
     } else {
       this.task.IsValidated = 'True';//got from combo box
@@ -230,7 +232,7 @@ export class CreateTaskComponent implements OnInit {
     }
   }
 
-  StatusValidateSelect(value) {
+  /*StatusValidateSelect(value) {
     if (!value) {
       this.StatusSelectHasError = true;
     } else {
@@ -252,10 +254,10 @@ export class CreateTaskComponent implements OnInit {
     } else {
       this.RequirementSelectHasError = false;
     }
-  }
-  employeeChange() {
+  } */
+ /* employeeChange() {
     this.requirementService.GetAllByEmployeeId(this.idEmp.toString()).subscribe((data) => {
       this.sourceReq = new LocalDataSource(data);
     })
-  }
+  } */
 }

@@ -50,8 +50,7 @@
             <div class="form-group">
               <label>Type</label>
               <select formControlName="Type" 
-              (blur)="TypeValidateSelect($event.target.value)"
-                (change)="TypeValidateSelect($event.target.value)" class="form-control" [ngClass]="{ 'is-invalid': submitted && TypeSelectHasError}" placeholder="Select Type"
+                class="form-control" [ngClass]="{ 'is-invalid': submitted && TypeSelectHasError}" placeholder="Select Type"
                 size="small" outline status="success" [(ngModel)]="type" name="type" (click)="$event.preventDefault()">
                 <option value="" selected> </option>
                 <option> Functional  </option>

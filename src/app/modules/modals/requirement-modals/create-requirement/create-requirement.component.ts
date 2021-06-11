@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 import { RequirementService, ContractService } from 'src/app/core/services';
-import { Requirement } from 'src/app/core/models';
+import { Contract, Requirement } from 'src/app/core/models';
 import { ReleaseService } from 'src/app/core/services/release.service';
 import { ParameterService } from 'src/app/core/services/parameter.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -15,6 +15,7 @@ import { Guid } from 'guid-typescript';
 })
 export class CreateRequirementComponent implements OnInit {
 
+  TypeSelectHasError=true;
   StatusselectHasError = true;
   ReleaseselectHasError = true;
   PRequirementselectHasError = true;
@@ -28,13 +29,17 @@ export class CreateRequirementComponent implements OnInit {
   requirement = new Requirement();
   startDateReq = new Date();
   closingDateReq = new Date();
+ 
   idC;
+  Type;
   idP;
+  status;
   idR;
   parameter;
   parametertype;
   parameterstype: any[];
   parameters: any[];
+  checkoutForm: FormGroup;
   constructor(
     protected ref: NbDialogRef<CreateRequirementComponent>,
     private contractService: ContractService,
@@ -45,7 +50,7 @@ export class CreateRequirementComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.requirementForm = this.formBuilder.group({
+   this.requirementForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       startDate: ['', this.DateValidator()],
@@ -54,14 +59,9 @@ export class CreateRequirementComponent implements OnInit {
       Contract: ['', Validators.required],
       PRequirement: [],
       Release: [],
-      Status: ['', Validators.required]
-    });
+      status: ['', Validators.required]
+    }); 
 
-    this.parameterService.getByGroup("RequirementsType")
-      .subscribe(data => this.parameterstype = data);
-
-    this.parameterService.getByGroup("RequirementsStatus")
-      .subscribe(data => this.parameters = data);
 
     this.contractService.getAll()
       .subscribe(data => this.contracts = data);
@@ -74,43 +74,29 @@ export class CreateRequirementComponent implements OnInit {
   }
   get f() { return this.requirementForm.controls; }
 
+ 
   create() {
 
-    if (this.startDateReq > this.closingDateReq) {
-      window.alert("Start date must be equal or inferior to closing date"); return;
-    }
-    this.submitted = true;
-
-    if (this.requirementForm.invalid) {
-      return;
-    }
-
-    this.requirement.ContractId = this.idC;
-    //this.requirement.releaseId = this.idR;
+    console.log(this.requirementForm.value)
+  
+    if(this.startDateReq>this.closingDateReq){
+  window.alert("Start date must be equal or inferior to end date");return;}
+  //  this.submitted = true;
     this.requirement.StartDate = this.startDateReq.toDateString();
     this.requirement.ClosingDate = this.closingDateReq.toDateString();
-    this.requirement.Status = this.parameter;
-    this.requirement.Type = this.parametertype;
 
-    if (this.idP) {
-      this.requirement.ParentRequirementId = this.idP;
-    }
-    
-    if (this.idR) {
-      this.requirement.ReleaseId = this.idR;
 
-    }
-
-    this.requirementService.create(this.requirement).
+   this.requirementService.create(this.requirement).
       subscribe(requirement => {
         this.ref.close(requirement);
       });
+  } 
 
-  }
 
   dismiss() {
     this.ref.close();
   }
+
 
   DateValidator(format = "dd/MM/YYYY"): any {
     return (control: FormControl): { [key: string]: any } => {
@@ -122,44 +108,8 @@ export class CreateRequirementComponent implements OnInit {
     };
   }
 
-  StatusvalidateSelect(value) {
-    if (!value) {
-      this.StatusselectHasError = true;
-    } else {
-      this.StatusselectHasError = false;
-    }
-  }
+  
 
-  /*ReleasevalidateSelect(value) {
-    if (!value) {
-      this.ReleaseselectHasError = true;
-    } else {
-      this.ReleaseselectHasError = false;
-    }
-  }
-
-    PRequirementvalidateSelect(value) {
-    if (!value) {
-      this.PRequirementselectHasError = true;
-    } else {
-      this.PRequirementselectHasError = false;
-    }
-  }*/
-
-  TypevalidateSelect(value) {
-    if (!value) {
-      this.TypeselectHasError = true;
-    } else {
-      this.TypeselectHasError = false;
-    }
-  }
-
-  ContractvalidateSelect(value) {
-    if (!value) {
-      this.ContractselectHasError = true;
-    } else {
-      this.ContractselectHasError = false;
-    }
-  }
+ 
 
 }

@@ -5,113 +5,52 @@
   </nb-card-header>
 
   <nb-card-body>
-      <form [formGroup]="requirementForm">
+
+    <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
 
       <div class="row">
+
         <div class="col-sm-6">
 
           <div class="form-group">
             <label>Name</label>
-            <input formControlName="name" nbInput type="text" class="form-control" placeholder="Name" name="nom" [(ngModel)]="requirement.Nom"
-             [ngClass]="{ 'is-invalid': submitted && f.name.invalid }"  />
-            <div *ngIf="submitted && f.name.invalid" class="invalid-feedback">
-              <div *ngIf="f.name.errors.required">Name is required</div>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label>Description</label>
-            <textarea formControlName="description" nbInput id="description" class="form-control" rows="3" placeholder="Description"
-              name="description" [(ngModel)]="requirement.Description"
-               [ngClass]="{ 'is-invalid': submitted && f.description.invalid }"  ></textarea>
-            <div *ngIf="submitted && f.description.invalid" class="invalid-feedback">
-              <div *ngIf="f.description.errors.required">Description is required</div>
+            <input nbInput type="text" class="form-control" placeholder="Name" name="name" [(ngModel)]="requirement.Nom"
+              #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required />
+            <div *ngIf="f.submitted" class="invalid-feedback">
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Type</label>
-            <select formControlName="Type" (blur)="TypevalidateSelect($event.target.value)" (change)="TypevalidateSelect($event.target.value)" class="form-control" placeholder="Select Status" size="small" outline status="success"
-              [(ngModel)]="parametertype" name="parametertype" (click)="$event.preventDefault()" [ngClass]="{ 'is-invalid': submitted && TypeselectHasError }">
-              <option value="" disabled selected> </option>
-              <option> Functional requirements </option>
-              <option> Non-functional requirements </option>
-            </select>
-            <div *ngIf="TypeselectHasError"  class="invalid-feedback">Type is required</div>
-          </div>
-          
-          <div class="row">
-              <div class="col-sm-6">
-            <div class="form-group">
-              <label>Start Date</label>
-              <input formControlName="startDate" [nbDatepicker]="startDate" class="form-control" [(ngModel)]="startDateReq" name="startDateReq"
-              [ngClass]="{ 'is-invalid': submitted && f.startDate.invalid}"  >
-              <nb-datepicker #startDate format="MM/dd/yyyy"></nb-datepicker>
-              <div *ngIf="submitted && f.startDate.invalid" class="invalid-feedback">
-                <div>Start Date is invalid</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label>Closing Date</label>
-              <input formControlName="closingDate" [nbDatepicker]="closingDate" class="form-control" [(ngModel)]="closingDateReq" name="closingDateReq"
-              [ngClass]="{ 'is-invalid': submitted && f.closingDate.invalid}">
-              <nb-datepicker #closingDate format="MM/dd/yyyy"></nb-datepicker>
-              <div *ngIf="submitted && f.closingDate.invalid" class="invalid-feedback">
-                <div>Closing Date is invalid</div>
-              </div>
-            </div>
-          </div>
-          </div>
+
         </div>
 
         <div class="col-sm-6">
 
-         <!-- <div class="form-group">
-            <label for="contract">Contract</label>
-            <select formControlName="Contract" (blur)="ContractvalidateSelect($event.target.value)" (change)="ContractvalidateSelect($event.target.value)" class="form-control" placeholder="Select Contract" size="small" outline status="success"
-              [(ngModel)]="idC" name="idC" (click)="$event.preventDefault()" [ngClass]="{ 'is-invalid': submitted && ContractselectHasError }">
-              <option value="" disabled selected> </option>
-              <option *ngFor=" let contract of contracts " value="{{contract.id}}">
-                {{contract.Name}}
-              </option>
-            </select>
-           <!-- <div *ngIf="ContractselectHasError"  class="invalid-feedback">Contract is required</div> -->
-
-           <div class="form-group">
-              <label >Parent Requirement</label>
-              <select formControlName="PRequirement" class="form-control" placeholder="Select Parent Requirement" size="small" outline status="success"
-                [(ngModel)]="idP" name="idP" (click)="$event.preventDefault()">
-                <option value="" disabled selected> </option>
-                <option *ngFor=" let requirement of requirements " value="{{requirement.id}}">
-                  {{requirement.Nom}}
-                </option>
-              </select>
-          </div>
-
           <div class="form-group">
-            <label>Release</label>
-            <select formControlName="Release"  class="form-control" placeholder="Select Release" size="small" outline status="success"
-              [(ngModel)]="idR" name="idR" (click)="$event.preventDefault()" >
-              <option value="" disabled selected> </option>
-              <option *ngFor=" let release of releases " value="{{release.Id}}">
-                {{release.Description}}
-              </option>
-            </select>
-            <!-- <div *ngIf="ReleaseselectHasError"  class="invalid-feedback">Release is required</div> -->
+            <label>Type</label>
+            <input nbInput type="text" class="form-control" placeholder="Type" name="Type"
+              [(ngModel)]="requirement.type" #adress="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && adress.invalid }" required />
+            <div *ngIf="f.submitted " class="invalid-feedback">
+            </div>
           </div>
 
           <div class="form-group">
             <label>Status</label>
-            <select formControlName="Status" (blur)="StatusvalidateSelect($event.target.value)" (change)="StatusvalidateSelect($event.target.value)" class="form-control" placeholder="Select Status" size="small" outline status="success"
-              [(ngModel)]="parameter" name="parameter" (click)="$event.preventDefault()" [ngClass]="{ 'is-invalid': submitted && StatusselectHasError }">
-              <option value="" disabled selected> </option>
-              <option> Active </option>
-              <option> Inactive </option>
+            <input nbInput type="text" class="form-control" placeholder="Status" name="Status" [(ngModel)]="requirement.status"
+              #mail="ngModel" [ngClass]="{ 'is-invalid': f.submitted }" required Status/>
+            <div *ngIf="f.submitted " class="invalid-feedback">
+            </div>
+          </div>
 
-            </select>
-            <div *ngIf="StatusselectHasError"  class="invalid-feedback">Status is required</div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea nbInput class="form-control" placeholder="Description" name="description"
+              [(ngModel)]="requirement.Description" #description="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted }" required>
+            </textarea>
+            <div *ngIf="f.submitted " class="invalid-feedback">
+            </div>
+
           </div>
 
         </div>
@@ -120,7 +59,7 @@
 
       <button nbButton class="clearButton" type="reset" outline status="info">Clear</button>
 
-      <button nbButton class="submitButton" type="submit" hero status="success" (click)="create()">Submit</button>
+      <button nbButton class="submitButton" type="submit" hero status="success">Submit</button>
 
     </form>
 

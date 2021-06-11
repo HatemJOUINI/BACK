@@ -89,13 +89,13 @@ export class AssignUserToTeamComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.employeesSelected = [];
+ /*   this.employeesSelected = [];
 
     // display employees which are not assigned to the team
-    this.teamUserService.GetAllNotAssignedByTeamId(this.team.id.toString()).
+  //  this.teamUserService.GetAllNotAssignedByTeamId(this.team.id.toString()).
     subscribe((data) => {
       this.listeEmployeesNA = new LocalDataSource(data);
-    });
+    }); */
   }
 
   create() {
